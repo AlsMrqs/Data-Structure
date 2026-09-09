@@ -12,11 +12,11 @@ cross = flip edge
 instance (Show a) => Show (Quartic a) where
     show g = 
         "\n"++
-        -- show (vert $ cross W up)++ " " ++(show $ vert up)++ " " ++show (vert $ cross E up)
-        -- ++"\n"++
+        show (vert $ cross W up)++ " " ++(show $ vert up)++ " " ++show (vert $ cross E up)
+        ++"\n"++
         show (vert $ cross W g) ++ " " ++ (show $ vert g) ++ " " ++ show (vert $ cross E g)
-        -- ++"\n"++
-        -- show (vert $ cross W down)++ " " ++(show $ vert down)++ " " ++show (vert $ cross E down)
+        ++"\n"++
+        show (vert $ cross W down)++ " " ++(show $ vert down)++ " " ++show (vert $ cross E down)
         ++"\n"
         where
         up = cross N g
@@ -58,7 +58,7 @@ vertical sets (origin, node) = case sets of
     ((x:xs):ys) -> (,) last next
         where
         next          = Vertex x (link node down left right) 
-        (left, right) = horizontal xs (origin, next)
+        (left, right) = horizontal xs (next, next)
         (last, down)  = vertical   ys (origin, next) 
 
 horizontal :: [a] -> (Quartic a, Quartic a) -> (Quartic a, Quartic a)
