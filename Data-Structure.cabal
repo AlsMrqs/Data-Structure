@@ -1,0 +1,40 @@
+cabal-version:   3.0
+name:            Data-Structure
+version:         0.1.0.0
+synopsis:        "Research some data-structures in Haskell"
+license:         BSD-3-Clause
+license-file:    LICENSE
+author:          naturefx
+maintainer:      alsmrqs@outlook.com
+category:        System
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  
+        MyLib,
+        Vertex,
+        Math,
+        Space
+    build-depends:    
+        base ^>=4.18.3.0,
+        random,
+        containers,
+        time,
+        mtl
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+test-suite Data-Structure-test
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.18.3.0,
+        Data-Structure
