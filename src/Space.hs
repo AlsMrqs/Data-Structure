@@ -1,4 +1,5 @@
 module Space where
+
 import qualified System.Random as Random
 import qualified Data.Bool as Bool (bool)
 import qualified Data.List as List (foldl1', foldl')
@@ -43,6 +44,19 @@ select axis fn = List.foldl1' eval
     eval a b = Bool.bool b a
         $ fn (coord axis a) (coord axis b)
 
+roundTo :: Int -> Double -> Double
+roundTo n = flip (/) (10^n) . fromIntegral . (round :: Double -> Int) . (*) (10^n) 
+
+-- Generation -- 
+
 generateCoord:: IO Coord
 generateCoord = Random.newStdGen >>= return . fst . Random.randomR (-1,1)
+
+randomPosition :: IO Point -- (Double,Double,Double)
+randomPosition = do
+    x <- return . roundTo 2 =<< Space.generateCoord
+    y <- return . roundTo 2 =<< Space.generateCoord
+    z <- return 0 -- roundTo 2 =<< Space.generateCoord
+    return (x,y,z)
+
 
